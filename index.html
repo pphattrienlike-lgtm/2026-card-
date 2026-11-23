@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>나만의 명함 만들기</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>나만의 명함 만들기</h1>
+    <p>왼쪽에 입력하면 오른쪽에 명함이 바로 반영됩니다</p>
+  </header>
+
+  <main class="container">
+    <!-- left -->
+    <section class="editor">
+      <form action="#">
+        <!-- 기본 정보 세트 -->
+        <fieldset>
+          <legend>기본 정보</legend>
+
+          <label for="input-name">이름</label>
+          <input type="text" id="input-name" placeholder="예: 팜팟젠">
+
+          <label for="input-dept">학과</label>
+          <select id="input-dept">
+            <option value="">학과를 선택하세요</option>
+            <option value="컴퓨터공학과">컴퓨터공학과</option>
+            <option value="소프트웨어공학과">소프트웨어공학과</option>
+            <option value="인공지능학과">인공지능학과</option>
+            <option value="게임콘텐츠학과">게임콘텐츠학과</option>
+            <option value="정보보안학과">정보보안학과</option>
+          </select>
+
+          <label for="input-role">희망 분야</label>
+          <input type="text" id="input-role" placeholder="예: 프론트엔드 개발자">
+        </fieldset>
+
+        <!-- 연락처 세트 -->
+        <fieldset>
+          <legend>연락처</legend>
+
+          <label for="input-phone">전화번호</label>
+          <input type="tel" id="input-phone" placeholder="예: 010-1234-5678">
+
+          <label for="input-email">이메일</label>
+          <input type="email" id="input-email" placeholder="예: hong@google.ac.kr">
+        </fieldset>
+
+        <!-- 소개 세트 -->
+        <fieldset>
+          <legend>한 줄 소개</legend>
+
+          <label for="input-intro">나를 소개하는 문장</label>
+          <textarea id="input-intro" rows="3" placeholder="예: 항상 최선을 다하는 사람."></textarea>
+        </fieldset>
+      </form>
+    </section>
+
+    <!-- right -->
+    <section class="preview">
+      <h2>미리보기</h2>
+      <div class="card">
+        <div class="card-top">
+          <p class="card-dept" id="card-dept">컴퓨터공학과</p>
+          <p class="name" id="card-name">홍길동</p>
+          <p class="card-role" id="card-role">프론트엔드 개발자</p>
+        </div>
+
+        <p class="card-intro" id="card-intro">항상 최선을 다하는 사람.</p>
+
+        <ul>
+          <li>☎️ <span id="card-phone">010-1234-5678</span></li>
+          <li>📩 <span id="card-email">hong@gmail.com</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; 2026 웹기초프로그래밍 - 팜팟지엔</small>
+  </footer>
+
+  <script>
+    // [input id, card id, giá trị mặc định khi để trống]
+    const fields = [
+      ["input-name",  "card-name",  "홍길동"],
+      ["input-dept",  "card-dept",  "컴퓨터공학과"],
+      ["input-role",  "card-role",  "프론트엔드 개발자"],
+      ["input-phone", "card-phone", "010-1234-5678"],
+      ["input-email", "card-email", "hong@gmail.com"],
+      ["input-intro", "card-intro", "항상 최선을 다하는 사람."]
+    ];
+
+    fields.forEach(([inputId, cardId, fallback]) => {
+      const input = document.getElementById(inputId);
+      const target = document.getElementById(cardId);
+      const update = () => { target.textContent = input.value.trim() || fallback; };
+      input.addEventListener("input", update);
+      input.addEventListener("change", update); // cho <select>
+    });
+  </script>
+  <script src="js/script.js"></script>
+</body>
+</html>
